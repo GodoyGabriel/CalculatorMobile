@@ -5,14 +5,15 @@ interface Props {
   text: string;
   background?: string;
   widthDouble?: boolean;
-  onPress?: () => void;
+  onPress: (text: string) => void;
 }
 
 export const ButtonCalc = (props: Props) => {
-  const {text, background = '#2D2D2D', widthDouble = false} = props;
+  const {text, background = '#2D2D2D', widthDouble = false, onPress} = props;
 
   return (
     <TouchableOpacity
+    onPress={() => onPress(text)}
       style={{
         ...styles.btn,
         backgroundColor: background,
