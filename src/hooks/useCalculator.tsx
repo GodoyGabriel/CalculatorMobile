@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import {Operators} from '../utils/utils';
+import { RowBtns } from '../interfaces/MockCalculator';
 
 export const useCalculator = () => {
   const [result, setResult] = useState('100');
@@ -86,6 +87,29 @@ export const useCalculator = () => {
     setLastResult('0');
   };
 
+  const getOnPress = (value: string, btn: RowBtns) => {
+    switch (btn.onPress) {
+      case 'btnOperation':
+        if (btn.valueOfFunc) btnOperation(btn.valueOfFunc);
+        break;
+      case 'clean':
+        clean();
+        break;
+      case 'positiveNegative':
+        positiveNegative();
+        break;
+      case 'btnDel':
+        btnDel();
+        break;
+      case 'calculate':
+        calculate();
+        break;
+      default:
+        buildNumber(value);
+        break;
+    }
+  };
+
   return {
     result,
     lastResult,
@@ -95,6 +119,7 @@ export const useCalculator = () => {
     btnDel,
     btnOperation,
     calculate,
+    getOnPress,
     Operators,
   };
 };
